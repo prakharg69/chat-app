@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth-route.js"
-
+import {conectDb} from "./lib/db.js"
 dotenv.config();
 
 const app = express();
@@ -21,6 +21,7 @@ app.use("/",authRoutes);
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  conectDb();
 });
 
 
