@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
   res.send("jbaha");
   console.log(`Request received: ${req.method} ${req.url}`);
 });
-app.use("/api/auth",authRoutes);
+app.use("/",authRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
