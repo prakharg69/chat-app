@@ -94,7 +94,7 @@ export const login = async (req, res) => {
     }
 
     // 3️⃣ Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password );
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -113,7 +113,6 @@ export const login = async (req, res) => {
         _id: user._id,
         email: user.email,
         fullname: user.fullname,
-        profilePic: user.profilePic,
       },
       token,
     });
