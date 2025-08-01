@@ -125,3 +125,23 @@ export const login = async (req, res) => {
     });
   }
 };
+// ✅ LOGOUT CONTROLLER
+export const logout = (req, res) => {
+  console.log("hello");
+  
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0), // Expire immediately
+    sameSite: "strict",
+    secure:process.env.NODE_ENV !== "development",
+  });
+
+  return res.status(200).json({
+    success: true,
+    message: "Logged out successfully 💋",
+  });
+};
+
+export const updatedProfile = (req,res)=>{
+  
+}

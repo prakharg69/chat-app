@@ -13,7 +13,13 @@ app.use(express.json());
 app.use(cookieParser());
 // Route
 app.get("/hii", (req, res) => {
+  console.log("js;fs");
+  
   const token = req.cookies.token;
+  if(!token){
+    console.log("not");
+    
+  }
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   res.json({ token, message: "Token is valid", payload: decoded });
