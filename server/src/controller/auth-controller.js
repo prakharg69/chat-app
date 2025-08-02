@@ -1,7 +1,8 @@
 import User from "../modules/user-module.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js"; // Make sure spelling is correct
-
+import cloudinary from "../lib/cloudnary.js";
+import cloudinary from "../lib/cloudnary.js"
 // ✅ SIGNUP CONTROLLER
 export const signup = async (req, res) => {
   console.log(" Signup Request Received");
@@ -142,6 +143,42 @@ export const logout = (req, res) => {
   });
 };
 
-export const updatedProfile = (req,res)=>{
-  
-}
+
+export const updatedProfile = async (req, res) => {
+  try {
+    const { profilePic } = req.body;
+    const userId = req.user._id;
+
+    // 🛑 Check if profilePic is provided
+    if (!profilePic) {
+      return res.status(400).json({
+        success: false,
+        message: "Profile picture is required 📷",
+      });
+    }
+
+    // ☁️ Upload to Cloudinary
+    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+
+    // 🧑‍💻 Update user profilePic
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: uploadResponse.secure_url },
+      { new: true }
+    ).select("-password");
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully 😍",
+      user: updatedUser,
+    });
+
+  } catch (error) {
+    console.error("Update profile error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating profile 💥",
+      error: error.message,
+    });
+  }
+};
