@@ -1,5 +1,5 @@
 import express from 'express';
-import {login,logout,updatedProfile,signup} from "../controller/auth-controller.js"
+import {login,logout,checkAuth,updatedProfile,signup} from "../controller/auth-controller.js"
 import {protectRoute} from "../middleware/protectRoute.js"
 const router = express.Router();
 router.post('/signup',signup)

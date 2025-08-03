@@ -2,7 +2,6 @@ import User from "../modules/user-module.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js"; // Make sure spelling is correct
 import cloudinary from "../lib/cloudnary.js";
-import cloudinary from "../lib/cloudnary.js"
 // ✅ SIGNUP CONTROLLER
 export const signup = async (req, res) => {
   console.log(" Signup Request Received");
@@ -182,3 +181,13 @@ export const updatedProfile = async (req, res) => {
     });
   }
 };
+export const checkAuth = async(req,res)=>{
+    try {
+      res.status(200).json(req.user);
+
+    } catch (error) {
+      console.log("Error in checkAuth ",error.message);
+      res.status(500).json({message:error.message,success:false}) 
+      
+    }
+}
