@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth-route.js";
+import messageRoutes from "./routes/messageRoutes-route.js";
 import { connection } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
@@ -26,6 +27,7 @@ app.get("/hii", (req, res) => {
   console.log(`Request received: ${req.method} ${req.url}`);
 });
 app.use("/", authRoutes);
+app.use("/message", messageRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
