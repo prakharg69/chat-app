@@ -5,6 +5,8 @@ import messageRoutes from "./routes/messageRoutes-route.js";
 import { connection } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
+import cors from "cors";
+
 dotenv.config();
 
 const app = express();
@@ -12,6 +14,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+  origin:"http://localhost:5173/",
+  credentials:true
+}))
+
 // Route
 app.get("/hii", (req, res) => {
   console.log("js;fs");
