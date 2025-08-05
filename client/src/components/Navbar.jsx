@@ -8,7 +8,7 @@ const Navbar = () => {
       {/* Logo with custom font */}
       <Link
         to="/"
-        className="text-3xl font-bold text-pink-500 hover:text-pink-400 transition-all duration-200"
+        className="text-3xl font-bold text-blue-400 hover:text-blue-900 transition-all duration-200"
         style={{ fontFamily: "'Bungee Shade'" }}
       >
         Chatzilla
