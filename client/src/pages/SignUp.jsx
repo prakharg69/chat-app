@@ -1,7 +1,7 @@
 // pages/Signup.jsx
 import { useEffect, useRef, useState } from "react";
 import Photo from "../assets/chat.png";
-import { MessageCircle, Users2, Grid, Send, Settings } from "lucide-react";
+import { MessageCircle, Users2, Grid, Send, Settings, Eye, EyeClosed } from "lucide-react";
 
 const iconData = [
   { name: "Message", icon: <MessageCircle size={24} /> },
@@ -63,6 +63,7 @@ export const sidebarChats = [
 
 const Signup = () => {
   const [message, setMessage] = useState("");
+  const [showpassword,setshowpassword]=useState(false)
   const [bubbleChats, setbubbleChats] = useState([
     {
       username: "Shruti ❤️",
@@ -189,16 +190,17 @@ const Signup = () => {
         />
       </div>
 
-      <div className="mb-8">
+      <div className="mb-8 relative">
         <label className="block mb-2 text-sm text-gray-300">Password</label>
         <input
-          type="password"
+          type={showpassword ? "text":"password"}
           name="password"
           onChange={handleChange}
           className="w-full px-4 py-2 rounded-xl bg-[#1e1f22] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"
           required
           autoComplete="current-password"
         />
+       <button className="absolute top-9 right-[0.6rem] text-black" onClick={()=> setshowpassword(!showpassword)}>{showpassword?<Eye></Eye>:<EyeClosed></EyeClosed>}</button>
       </div>
 
       <button

@@ -182,6 +182,8 @@ export const updatedProfile = async (req, res) => {
   }
 };
 export const checkAuth = async(req,res)=>{
+  console.log("hello");
+  
     try {
       res.status(200).json(req.user);
 

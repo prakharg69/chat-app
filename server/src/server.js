@@ -11,33 +11,46 @@ dotenv.config();
 
 const app = express();
 
+// ==========================
 // Middleware
+// ==========================
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin:"http://localhost:5173/",
-  credentials:true
-}))
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
-// Route
+// ==========================
+// Test Route
+// ==========================
 app.get("/hii", (req, res) => {
-  console.log("js;fs");
-  
   const token = req.cookies.token;
-  if(!token){
-    console.log("not");
-    
-  }
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  res.json({ token, message: "Token is valid", payload: decoded });
-  console.log(`Request received: ${req.method} ${req.url}`);
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return res.json({ token, message: "Token is valid", payload: decoded });
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid or expired token" });
+  }
 });
+
+// ==========================
+// Main Routes
+// ==========================
 app.use("/", authRoutes);
 app.use("/message", messageRoutes);
 
-const PORT = process.env.PORT;
+// ==========================
+// Server Listen
+// ==========================
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+console.log(`🚀 Server running at http://localhost:${PORT}`);
   connection();
 });
