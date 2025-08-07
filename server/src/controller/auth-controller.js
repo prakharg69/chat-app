@@ -73,6 +73,8 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+  console.log("helooo45372728t2");
+  
   const { email, password } = req.body;
 
   try {

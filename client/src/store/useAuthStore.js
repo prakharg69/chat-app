@@ -45,4 +45,14 @@ export const useAuthStore = create((set) => ({
         
     }
   },
+  login:async(data)=>{
+    try {
+        const res = await axiosInstant.post("/login", data);
+      toast.success("Login succesfully");
+      set({ authUser: res.data });
+    } catch (error) {
+         console.log(error.message);
+        toast.error(error.message);
+    }
+  }
 }));

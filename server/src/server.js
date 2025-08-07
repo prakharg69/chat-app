@@ -11,9 +11,6 @@ dotenv.config();
 
 const app = express();
 
-// ==========================
-// Middleware
-// ==========================
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -21,9 +18,6 @@ app.use(cors({
   credentials: true
 }));
 
-// ==========================
-// Test Route
-// ==========================
 app.get("/hii", (req, res) => {
   const token = req.cookies.token;
 
