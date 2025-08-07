@@ -1,0 +1,51 @@
+export const sidebarChats = [
+  {
+    id: 1,
+    photo: "https://randomuser.me/api/portraits/women/65.jpg",
+    username: "Ankita🔥",
+    lastMessage: "Baby, still online? 😉",
+    time: "2:03 PM",
+    unreadCount: 3,
+  },
+  {
+    id: 2,
+    photo: "https://randomuser.me/api/portraits/men/22.jpg",
+    username: "Raj Bhai",
+    lastMessage: "Meeting kal 10 baje hai...",
+    time: "1:45 PM",
+    unreadCount: 0,
+  },
+  {
+    id: 3,
+    photo: "https://randomuser.me/api/portraits/women/12.jpg",
+    username: "Shreya",
+    lastMessage: "Teri baaton ka jawab nahi 💅",
+    time: "1:20 PM",
+    unreadCount: 7,
+  },
+  {
+    id: 4,
+    photo: "https://randomuser.me/api/portraits/women/81.jpg",
+    username: "MeowQueen",
+    lastMessage: "Sent you the meme 😹",
+    time: "12:50 PM",
+    unreadCount: 1,
+  },
+  {
+    id: 5,
+    photo: "https://randomuser.me/api/portraits/men/90.jpg",
+    username: "Sir",
+    lastMessage: "Assignment bhej diya?",
+    time: "12:10 PM",
+    unreadCount: 0,
+  },
+  {
+    id: 6,
+    photo: "https://randomuser.me/api/portraits/women/33.jpg",
+    username: "Nush 😘",
+    lastMessage: "Let’s meet tonight 🥺",
+    time: "11:40 AM",
+    unreadCount: 5,
+  },
+];
+

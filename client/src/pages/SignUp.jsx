@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import Photo from "../assets/chat.png";
 import { MessageCircle, Users2, Grid, Send, Settings, Eye, EyeClosed } from "lucide-react";
-
+import toast from "react-hot-toast";
+import {useAuthStore} from "../store/useAuthStore"
+import {sidebarChats} from "../store/context"
 const iconData = [
   { name: "Message", icon: <MessageCircle size={24} /> },
   { name: "Group", icon: <Users2 size={24} /> },
@@ -10,58 +12,10 @@ const iconData = [
   { name: "Settings", icon: <Settings size={24} /> },
 ];
 
-export const sidebarChats = [
-  {
-    id: 1,
-    photo: "https://randomuser.me/api/portraits/women/65.jpg",
-    username: "Ankita🔥",
-    lastMessage: "Baby, still online? 😉",
-    time: "2:03 PM",
-    unreadCount: 3,
-  },
-  {
-    id: 2,
-    photo: "https://randomuser.me/api/portraits/men/22.jpg",
-    username: "Raj Bhai",
-    lastMessage: "Meeting kal 10 baje hai...",
-    time: "1:45 PM",
-    unreadCount: 0,
-  },
-  {
-    id: 3,
-    photo: "https://randomuser.me/api/portraits/women/12.jpg",
-    username: "Shreya",
-    lastMessage: "Teri baaton ka jawab nahi 💅",
-    time: "1:20 PM",
-    unreadCount: 7,
-  },
-  {
-    id: 4,
-    photo: "https://randomuser.me/api/portraits/women/81.jpg",
-    username: "MeowQueen",
-    lastMessage: "Sent you the meme 😹",
-    time: "12:50 PM",
-    unreadCount: 1,
-  },
-  {
-    id: 5,
-    photo: "https://randomuser.me/api/portraits/men/90.jpg",
-    username: "Sir",
-    lastMessage: "Assignment bhej diya?",
-    time: "12:10 PM",
-    unreadCount: 0,
-  },
-  {
-    id: 6,
-    photo: "https://randomuser.me/api/portraits/women/33.jpg",
-    username: "Nush 😘",
-    lastMessage: "Let’s meet tonight 🥺",
-    time: "11:40 AM",
-    unreadCount: 5,
-  },
-];
 
 const Signup = () => {
+  const {signup}=useAuthStore();
+
   const [message, setMessage] = useState("");
   const [showpassword,setshowpassword]=useState(false)
   const [bubbleChats, setbubbleChats] = useState([
@@ -124,9 +78,39 @@ const Signup = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+const validateForm = () => {
+  const { fullname, email, password } = formData;
+
+  // Full Name check
+  if (!fullname.trim()) return toast.error("Full name is required");
+
+  // Email empty check
+  if (!email.trim()) return toast.error("Email is required");
+
+  // Email format check (simple regex)
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+  if (!emailRegex.test(email)) return toast.error("Enter a valid email address");
+
+  // Password empty check
+  if (!password) return toast.error("Password is required");
+
+  // Password length check
+  if (password.length < 6) return toast.error("Password must be at least 6 characters");
+
+  // ✅ All good
+  return true;
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Signup data:", formData);
+    const sucess = validateForm();
+    if(sucess){
+     signup(formData)
+      
+    }
+    
+    
   };
 
   const handleclick = () => {

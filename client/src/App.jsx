@@ -8,6 +8,7 @@ import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
 import { useAuthStore } from "./store/useAuthStore";
 import ChatLoader from "./components/ChatLoader";
+import {Toaster} from "react-hot-toast"
 
 function App() {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
@@ -28,6 +29,7 @@ if(isCheckingAuth && !authUser){
         <Route path="/setting" element={<Setting />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Toaster></Toaster>
     </div>
   );
 }
