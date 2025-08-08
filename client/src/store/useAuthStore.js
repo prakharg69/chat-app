@@ -37,22 +37,41 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     try {
       await axiosInstant.post("/logout");
+
       set({ authUser: null });
+      set({ isLoggingImg: false });
       toast.success("Logout successfull");
     } catch (error) {
-        console.log(error.message);
-        toast.error(error.message);
-        
+      console.log(error.message);
+      toast.error(error.message);
     }
   },
-  login:async(data)=>{
+  login: async (data) => {
     try {
-        const res = await axiosInstant.post("/login", data);
+      set({ isLoggingImg: true });
+      const res = await axiosInstant.post("/login", data);
       toast.success("Login succesfully");
       set({ authUser: res.data });
     } catch (error) {
-         console.log(error.message);
-        toast.error(error.message);
+      console.log(error.message);
+      toast.error(error.message);
     }
-  }
+  },
+  updatedProfile: async (data) => {
+    set({ isUpdatingProfile: true });
+    try {
+      const res = axiosInstant.post("/update-profile", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      set({ authUser: res.data });
+      console.log("user", authUser);
+      toast.success("Profile updated");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      EthernetPort({ isUpdatingProfile: false });
+    }
+  },
 }));

@@ -13,7 +13,7 @@ const iconData = [
 ];
 
 function Login() {
-   const {login}=useAuthStore();
+   const {login,authUser}=useAuthStore();
 
   const [message, setMessage] = useState("");
   const [showpassword,setshowpassword]=useState(false)
@@ -103,6 +103,8 @@ const validateForm = () => {
      login(formData)
       
     }
+    console.log(authUser);
+    
     
     
   };

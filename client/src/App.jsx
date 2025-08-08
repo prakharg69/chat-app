@@ -20,7 +20,7 @@ if(isCheckingAuth && !authUser){
   return(<ChatLoader></ChatLoader>)
 }
   return (
-    <div>
+    <div className="bg-[#1e1f22]">
       <Navbar />
       <Routes>
         <Route path="/" element={authUser? <Home /> :<Navigate to="/login"></Navigate>} />

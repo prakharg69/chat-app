@@ -2,6 +2,9 @@ import User from "../modules/user-module.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js"; // Make sure spelling is correct
 import cloudinary from "../lib/cloudnary.js";
+import multer from "multer";
+
+
 // ✅ SIGNUP CONTROLLER
 export const signup = async (req, res) => {
   console.log(" Signup Request Received");
